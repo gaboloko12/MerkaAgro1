@@ -1,0 +1,180 @@
+/* =========================
+   PRODUCT CARD – MERKAAGRO
+========================= */
+
+.product-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e5e7eb;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+  border-color: #16a34a;
+}
+
+/* =========================
+   IMAGEN
+========================= */
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+.image-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.product-card img.loading {
+  opacity: 0;
+}
+
+.product-card img.loaded {
+  opacity: 1;
+}
+
+.product-card:hover img.loaded {
+  transform: scale(1.05);
+}
+
+/* =========================
+   CUERPO
+========================= */
+
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.card-body h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.card-body .categoria {
+  font-size: 0.8rem;
+  color: #16a34a;
+  font-weight: 500;
+  margin: 0;
+  background: #f0fdf4;
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.card-body .price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #16a34a;
+  margin-top: 4px;
+}
+
+.card-body .location {
+  font-size: 0.85rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* =========================
+   BADGE ESTRELLA
+========================= */
+
+.badge-star {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 1.2rem;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* =========================
+   GRID DE PRODUCTOS
+========================= */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 28px;
+  width: 100%;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 640px) {
+  .product-card {
+    max-width: 100%;
+  }
+
+  .image-container {
+    height: 200px;
+  }
+
+  .card-body {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .card-body h3 {
+    font-size: 0.95rem;
+  }
+}
+

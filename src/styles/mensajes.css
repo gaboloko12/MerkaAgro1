@@ -1,0 +1,99 @@
+/* MENSAJES - MERKAAGRO */
+
+.mensajes-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px 40px;
+}
+
+.mensajes-header h1 {
+  font-size: 2rem;
+  color: #1f2937;
+  margin-bottom: 32px;
+}
+
+.mensajes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mensaje-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #16a34a;
+  transition: transform 0.2s ease;
+}
+
+.mensaje-card:hover {
+  transform: translateX(4px);
+}
+
+.mensaje-card.no-leido {
+  border-left-color: #ef4444;
+  background: #fef2f2;
+}
+
+.mensaje-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.mensaje-cliente {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 1.1rem;
+}
+
+.mensaje-fecha {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.mensaje-producto {
+  color: #16a34a;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.mensaje-texto {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.mensaje-contacto {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+  .mensajes-container {
+    padding: 80px 16px 30px;
+  }
+
+  .mensajes-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .mensaje-card {
+    padding: 16px;
+  }
+
+  .mensaje-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .mensaje-contacto {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
