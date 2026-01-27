@@ -1,9 +1,37 @@
 /* PRODUCT DETAIL - MERKAAGRO */
 
+/* BARRA DE TÍTULO FIJA */
+.product-title-bar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-title-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+}
+
+.product-title-fixed {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .product-detail {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px 40px;
+  padding: 150px 20px 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
@@ -199,12 +227,65 @@
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
+.description-section {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.description-section h3 {
+  font-size: 1.1rem;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+  font-weight: 600;
+}
+
 .description {
   font-size: 1.05rem;
   line-height: 1.7;
   color: #4b5563;
   white-space: pre-wrap;
   word-wrap: break-word;
+  margin: 0;
+  transition: max-height 0.3s ease;
+}
+
+.description-collapsed {
+  max-height: 150px;
+  overflow: hidden;
+  position: relative;
+}
+
+.description-collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, #f9fafb);
+}
+
+.btn-ver-mas {
+  background: #f0fdf4;
+  border: 1px solid #16a34a;
+  color: #16a34a;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-top: 12px;
+  display: inline-block;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-ver-mas:hover {
+  background: #16a34a;
+  color: #ffffff;
 }
 
 .seller-contact {
@@ -381,12 +462,13 @@
   color: #dc2626;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE - Optimizado para móvil estilo Mercado Libre */
 
 @media (max-width: 1024px) {
   .product-detail {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
+    padding: 140px 16px 30px;
   }
 
   .main-image-container {
@@ -395,20 +477,116 @@
 }
 
 @media (max-width: 768px) {
+  .product-title-bar {
+    top: 130px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  .product-title-container {
+    padding: 10px 16px;
+  }
+
+  .product-title-fixed {
+    font-size: 1.1rem;
+  }
+
   .product-detail {
-    padding: 80px 16px 30px;
+    padding: 175px 0 20px;
+    gap: 0;
+  }
+
+  .gallery {
+    gap: 12px;
+    margin-bottom: 20px;
   }
 
   .main-image-container {
     height: 350px;
+    border-radius: 0;
+  }
+
+  .thumbnails {
+    padding: 0 12px;
+    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
+
+  .thumbnails img {
+    height: 70px;
+    border-radius: 6px;
+  }
+
+  .info {
+    padding: 0 16px;
+    gap: 16px;
   }
 
   .info h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .categoria-detail {
+    font-size: 0.85rem;
+    padding: 6px 12px;
   }
 
   .price {
     font-size: 2rem;
+  }
+
+  .consulta-precio-btn {
+    font-size: 1.1rem;
+    padding: 14px 24px;
+    width: 100%;
+  }
+
+  .location {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .description-section {
+    padding: 12px;
+    margin-top: 16px;
+  }
+
+  .description-section h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .description-collapsed {
+    max-height: 120px;
+  }
+
+  .btn-ver-mas {
+    font-size: 0.9rem;
+    padding: 10px 18px;
+  }
+
+  .seller-contact {
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+
+  .seller-contact h3 {
+    font-size: 1.1rem;
+  }
+
+  .contact-btn {
+    font-size: 0.95rem;
+    padding: 12px 18px;
+  }
+
+  .actions button {
+    padding: 12px;
+    font-size: 1rem;
   }
 
   .lightbox-nav.prev {
@@ -417,5 +595,345 @@
 
   .lightbox-nav.next {
     right: 10px;
+  }
+
+  .zoom-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-title-bar {
+    top: 125px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  .product-title-container {
+    padding: 8px 12px;
+  }
+
+  .product-title-fixed {
+    font-size: 1rem;
+  }
+
+  .product-detail {
+    padding: 170px 0 16px;
+  }
+
+  .main-image-container {
+    height: 300px;
+  }
+
+  .zoom-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .nav-btn.prev {
+    left: 12px;
+  }
+
+  .nav-btn.next {
+    right: 12px;
+  }
+
+  .image-counter {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .thumbnails {
+    padding: 0 8px;
+    gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  }
+
+  .thumbnails img {
+    height: 60px;
+    border-width: 2px;
+    border-radius: 4px;
+  }
+
+  .info {
+    padding: 0 12px;
+    gap: 12px;
+  }
+
+  .info h1 {
+    font-size: 1.3rem;
+  }
+
+  .categoria-detail {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+
+  .price {
+    font-size: 1.8rem;
+  }
+
+  .consulta-precio-btn {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+
+  .location {
+    font-size: 0.9rem;
+  }
+
+  .envio-badge {
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .description-section {
+    padding: 10px;
+    margin-top: 12px;
+  }
+
+  .description-section h3 {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .description-collapsed {
+    max-height: 100px;
+  }
+
+  .btn-ver-mas {
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+
+  .seller-contact {
+    padding: 14px;
+    border-radius: 6px;
+  }
+
+  .seller-contact h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .contact-btn {
+    font-size: 0.9rem;
+    padding: 11px 16px;
+    gap: 8px;
+  }
+
+  .actions {
+    gap: 10px;
+    flex-direction: column;
+  }
+
+  .actions button {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .lightbox-close {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    top: 16px;
+    right: 16px;
+  }
+
+  .lightbox-nav {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+
+  .lightbox-counter {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-title-bar {
+    top: 120px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  .product-title-container {
+    padding: 6px 10px;
+  }
+
+  .product-title-fixed {
+    font-size: 0.9rem;
+  }
+
+  .product-detail {
+    padding: 165px 0 12px;
+  }
+
+  .main-image-container {
+    height: 260px;
+  }
+
+  .zoom-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .nav-btn.prev {
+    left: 10px;
+  }
+
+  .nav-btn.next {
+    right: 10px;
+  }
+
+  .image-counter {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  .thumbnails {
+    padding: 0 6px;
+    gap: 4px;
+    grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+  }
+
+  .thumbnails img {
+    height: 55px;
+  }
+
+  .info {
+    padding: 0 10px;
+    gap: 10px;
+  }
+
+  .info h1 {
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .categoria-detail {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  .consulta-precio-btn {
+    font-size: 0.95rem;
+    padding: 11px 18px;
+  }
+
+  .location {
+    font-size: 0.85rem;
+  }
+
+  .envio-badge {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .description-section {
+    padding: 8px;
+    margin-top: 10px;
+  }
+
+  .description-section h3 {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .description-collapsed {
+    max-height: 90px;
+  }
+
+  .description-collapsed::after {
+    height: 50px;
+  }
+
+  .btn-ver-mas {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+  }
+
+  .seller-contact {
+    padding: 12px;
+  }
+
+  .seller-contact h3 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .contact-btn {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+  }
+
+  .actions button {
+    padding: 11px;
+    font-size: 0.9rem;
+  }
+
+  .lightbox-close {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    top: 12px;
+    right: 12px;
+  }
+
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .lightbox-counter {
+    font-size: 0.9rem;
+    bottom: -35px;
+  }
+
+  .loading, .error {
+    padding: 40px 16px;
+    font-size: 1rem;
   }
 }

@@ -52,7 +52,10 @@ export default function ProductCard({ product }) {
             : `$${product.precio?.toLocaleString()}`
           }
         </p>
-        <p className="location">{product.ubicacion}</p>
+        {product.precio > 0 && !product.precioNegociable && (
+          <p className="envio-badge-card">Envío disponible</p>
+        )}
+        <p className="location">📍 {product.ubicacion}</p>
       </div>
 
       {product.destacado && <span className="badge-star">⭐</span>}

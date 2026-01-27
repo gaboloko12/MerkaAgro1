@@ -15,6 +15,7 @@ export default function ProductDetail() {
   const [showContactModal, setShowContactModal] = useState(false);
   const [showLightbox, setShowLightbox] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -82,6 +83,13 @@ export default function ProductDetail() {
 
   return (
     <>
+      {/* NOMBRE DEL PRODUCTO - Fijo debajo del header */}
+      <div className="product-title-bar">
+        <div className="product-title-container">
+          <h1 className="product-title-fixed">{product.nombre}</h1>
+        </div>
+      </div>
+
       <div className="product-detail">
         {/* GALERÍA */}
         <div className="gallery">
@@ -141,8 +149,6 @@ export default function ProductDetail() {
 
       {/* INFO */}
       <div className="info">
-        <h1>{product.nombre}</h1>
-
         {product.categoria && (
           <p className="categoria-detail">{getCategoriaConEmoji(product.categoria)}</p>
         )}
@@ -170,7 +176,21 @@ export default function ProductDetail() {
           </div>
         )}
 
-        <p className="description">{product.descripcion}</p>
+        {/* DESCRIPCIÓN CON VER MÁS */}
+        <div className="description-section">
+          <h3>Descripción</h3>
+          <p className={`description ${!showFullDescription ? 'description-collapsed' : ''}`}>
+            {product.descripcion}
+          </p>
+          {product.descripcion && product.descripcion.length > 200 && (
+            <button 
+              className="btn-ver-mas"
+              onClick={() => setShowFullDescription(!showFullDescription)}
+            >
+              {showFullDescription ? 'Ver menos' : 'Ver más'}
+            </button>
+          )}
+        </div>
 
         {/* CONTACTO DEL VENDEDOR */}
         {product.contacto && (

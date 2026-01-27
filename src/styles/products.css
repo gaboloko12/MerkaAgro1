@@ -154,8 +154,9 @@
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 28px;
+  gap: 16px;
   width: 100%;
+  padding: 0;
 }
 
 .loading, .no-products {
@@ -316,8 +317,9 @@
 /* TABLET (768px) */
 @media (max-width: 768px) {
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    padding: 0 8px;
   }
 
   .product-card {
@@ -325,15 +327,15 @@
   }
 
   .image-container {
-    height: 150px;
+    height: 180px;
   }
 
   .card-body h3 {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
   .card-body .price {
-    font-size: 1.1rem;
+    font-size: 1.35rem;
   }
 
   .section-header h2 {
@@ -364,57 +366,58 @@
 /* MÓVIL GRANDE (480px - 768px) */
 @media (max-width: 640px) {
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 8px;
   }
 
   .product-card {
-    border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   }
 
-  .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  .product-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   }
 
   .image-container {
-    height: 130px;
+    height: 160px;
   }
 
   .card-body {
-    padding: 12px;
-    gap: 6px;
+    padding: 8px;
+    gap: 4px;
   }
 
   .card-body h3 {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     white-space: normal;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
-    line-height: 1.2;
+    line-height: 1.3;
+    min-height: 2.1rem;
   }
 
   .card-body .categoria {
-    font-size: 0.7rem;
-    padding: 3px 6px;
+    font-size: 0.65rem;
   }
 
   .card-body .price {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 
   .card-body .location {
-    font-size: 0.75rem;
+    font-size: 0.68rem;
   }
 
   .badge {
-    font-size: 0.65rem;
-    padding: 4px 8px;
-    top: 8px;
-    right: 8px;
+    font-size: 0.6rem;
+    padding: 3px 6px;
+    top: 6px;
+    right: 6px;
   }
 
   .section-header h2 {
@@ -426,8 +429,8 @@
   }
 
   .home-main {
-    gap: 30px;
-    padding-bottom: 24px;
+    gap: 24px;
+    padding-bottom: 20px;
   }
 
   .section-destacados,
@@ -438,13 +441,13 @@
 
   .section-recomendados {
     padding: 16px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .filter-header {
     padding: 10px 12px;
     margin-bottom: 16px;
-    border-radius: 8px;
+    border-radius: 6px;
     border-left: 3px solid #16a34a;
   }
 
@@ -467,62 +470,63 @@
 @media (max-width: 480px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 6px;
     width: 100%;
     overflow-x: hidden;
+    padding: 0 4px;
   }
 
   .product-card {
     max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
     width: 100%;
   }
 
-  .product-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  .product-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .image-container {
-    height: 120px;
+    height: 140px;
   }
 
   .card-body {
-    padding: 10px;
-    gap: 5px;
+    padding: 6px;
+    gap: 3px;
   }
 
   .card-body h3 {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     white-space: normal;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
-    line-height: 1.1;
+    line-height: 1.25;
     overflow: hidden;
+    min-height: 2rem;
   }
 
   .card-body .categoria {
-    font-size: 0.65rem;
-    padding: 2px 5px;
+    font-size: 0.6rem;
   }
 
   .card-body .price {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     margin-top: 2px;
   }
 
   .card-body .location {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .badge {
-    font-size: 0.6rem;
-    padding: 3px 6px;
-    top: 6px;
-    right: 6px;
+    font-size: 0.55rem;
+    padding: 2px 5px;
+    top: 4px;
+    right: 4px;
   }
 
   .section-header h2 {
@@ -534,7 +538,7 @@
   }
 
   .home-main {
-    gap: 24px;
+    gap: 20px;
     padding-bottom: 16px;
   }
 
@@ -546,7 +550,7 @@
 
   .section-recomendados {
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1.5px solid #0ea5e9;
   }
 
