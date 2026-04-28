@@ -18,7 +18,6 @@ export default function ProductCard({ product }) {
   };
 
   const handleImageError = (e) => {
-    console.error("Error cargando imagen:", imageSrc);
     setImageError(true);
     setImageLoading(false);
     e.currentTarget.src = "https://via.placeholder.com/400x200?text=Sin+Imagen";
@@ -52,8 +51,8 @@ export default function ProductCard({ product }) {
             : `$${product.precio?.toLocaleString()}`
           }
         </p>
-        {product.precio > 0 && !product.precioNegociable && (
-          <p className="envio-badge-card">Envío disponible</p>
+        {product.envioMexico && (
+          <p className="envio-badge-card">🚚 Envío disponible</p>
         )}
         <p className="location">📍 {product.ubicacion}</p>
       </div>

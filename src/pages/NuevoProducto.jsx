@@ -5,35 +5,14 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db, storage } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { FaUpload, FaTrash } from "react-icons/fa";
+import { CATEGORIAS } from "../utils/categorias";
 import "../styles/nuevo-producto.css";
 
-const CATEGORIAS = [
-  "maquinaria",
-  "semillas",
-  "cosechas",
-  "servicios",
-  "fertilizantes",
-  "plagas",
-  "riego",
-  "alimentos",
-  "herramientas",
-  "insumos",
-  "transporte",
-  "animales",
-  "tierras",
-  "refacciones",
-  "tecnología",
-  "consultoría agrícola",
-  "energía solar",
-  "productos orgánicos",
-  "invernaderos",
-  "agroinsumos",
-  "forrajes",
-];
+const MAX_IMAGEN_MB = 5;
 
 export default function NuevoProducto() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [, setUser] = useState(null);
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
@@ -73,6 +52,11 @@ export default function NuevoProducto() {
     const files = Array.from(e.target.files);
     if (imagenes.length + files.length > 5) {
       setError("Máximo 5 imágenes permitidas");
+      return;
+    }
+    const sobrePeso = files.filter(f => f.size > MAX_IMAGEN_MB * 1024 * 1024);
+    if (sobrePeso.length > 0) {
+      setError(`Cada imagen debe pesar menos de ${MAX_IMAGEN_MB}MB`);
       return;
     }
     setImagenes(prev => [...prev, ...files]);
@@ -132,6 +116,12 @@ export default function NuevoProducto() {
         envioMexico: envioMexico,
         imagenes: imagenesUrls,
         creadoPor: auth.currentUser.uid,
+        vendedor: {
+          id: auth.currentUser.uid,
+          nombre: auth.currentUser.displayName || auth.currentUser.email?.split("@")[0] || "Vendedor",
+          email: auth.currentUser.email || "",
+          telefono: formData.contacto,
+        },
         creadoEn: serverTimestamp(),
         destacado: false,
         recomendado: false,

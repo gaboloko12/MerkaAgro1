@@ -1,40 +1,16 @@
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaChevronDown, FaSignOutAlt, FaBox, FaEnvelope, FaUser } from "react-icons/fa";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
+import { CATEGORIAS_CON_EMOJI } from "../utils/categorias";
 import "../styles/header.css";
-
-const CATEGORIAS = [
-  "Maquinaria 🚜",
-  "Semillas 🌱",
-  "Cosechas 🥕",
-  "Servicios 🧰",
-  "Fertilizantes 💧",
-  "Control de Plagas 🐛",
-  "Sistemas de Riego 💦",
-  "Alimentos 🍎",
-  "Herramientas 🔧",
-  "Insumos 📦",
-  "Transporte 🚚",
-  "Ganado y Animales 🐄",
-  "Tierras y Terrenos 🌾",
-  "Refacciones ⚙️",
-  "Tecnología Agrícola 💻",
-  "Consultoría Agrícola 🧑‍🌾",
-  "Energía Solar ☀️",
-  "Productos Orgánicos 🍃",
-  "Invernaderos 🏭",
-  "Agroinsumos 🧪",
-  "Forrajes y Pastos 🌿",
-];
 
 export default function Header() {
   const [search, setSearch] = useState("");
   const [showCategories, setShowCategories] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [user, setUser] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   // Obtener usuario autenticado
@@ -108,7 +84,7 @@ export default function Header() {
           </button>
           {showCategories && (
             <div className="categories-menu">
-              {CATEGORIAS.map((cat) => (
+              {CATEGORIAS_CON_EMOJI.map((cat) => (
                 <button
                   key={cat}
                   className="category-item"

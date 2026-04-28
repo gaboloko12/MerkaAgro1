@@ -30,7 +30,7 @@ export default function ContactModal({ isOpen, onClose, seller, productId, produ
       // Guardar en Firestore
       const mensajesRef = collection(db, "mensajes");
       await addDoc(mensajesRef, {
-        vendedorId: seller?.id || "vendedor-desconocido",
+        vendedorId: seller?.id || seller?.uid || "vendedor-desconocido",
         vendedorEmail: seller?.email || "",
         vendedorNombre: seller?.nombre || "Vendedor",
         productoId: productId,

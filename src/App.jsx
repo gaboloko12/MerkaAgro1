@@ -22,11 +22,11 @@ export default function App() {
           <Route path="/producto/:id" element={<ProductDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/nuevo-producto" element={<NuevoProducto />} />
-          <Route path="/editar-producto/:id" element={<EditarProducto />} />
-          <Route path="/mis-productos" element={<MisProductos />} />
-          <Route path="/mensajes" element={<MensajesVendedor />} />
-          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/nuevo-producto" element={<ProtectedRoute><NuevoProducto /></ProtectedRoute>} />
+          <Route path="/editar-producto/:id" element={<ProtectedRoute><EditarProducto /></ProtectedRoute>} />
+          <Route path="/mis-productos" element={<ProtectedRoute><MisProductos /></ProtectedRoute>} />
+          <Route path="/mensajes" element={<ProtectedRoute><MensajesVendedor /></ProtectedRoute>} />
+          <Route path="/perfil" element={<ProtectedRoute><Perfil /></ProtectedRoute>} />
         </Routes>
       </main>
     </div>

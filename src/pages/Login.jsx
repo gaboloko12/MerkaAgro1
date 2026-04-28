@@ -30,14 +30,14 @@ export default function Login() {
         navigate("/");
       }, 1500);
     } catch (err) {
-      if (err.code === "auth/user-not-found") {
-        setError("Usuario no encontrado");
-      } else if (err.code === "auth/wrong-password") {
-        setError("Contraseña incorrecta");
+      if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
+        setError("Email o contraseña incorrectos");
       } else if (err.code === "auth/invalid-email") {
         setError("Email inválido");
+      } else if (err.code === "auth/too-many-requests") {
+        setError("Demasiados intentos fallidos. Intenta más tarde");
       } else {
-        setError("Error: " + err.message);
+        setError("Error al iniciar sesión. Intenta de nuevo");
       }
     }
     setLoading(false);

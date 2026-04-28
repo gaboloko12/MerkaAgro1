@@ -67,11 +67,12 @@ export default function ProductDetail() {
 
   // Cerrar lightbox con tecla Escape
   useEffect(() => {
+    if (!showLightbox) return;
+
     const handleKeyDown = (e) => {
-      if (!showLightbox) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") nextLightboxImage();
-      if (e.key === "ArrowLeft") prevLightboxImage();
+      if (e.key === "Escape") setShowLightbox(false);
+      if (e.key === "ArrowRight") setLightboxIndex((prev) => (prev + 1) % images.length);
+      if (e.key === "ArrowLeft") setLightboxIndex((prev) => (prev - 1 + images.length) % images.length);
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -206,23 +207,15 @@ export default function ProductDetail() {
         )}
 
         <div className="actions">
-          <button 
+          <button
             className="primary"
             onClick={() => setShowContactModal(true)}
           >
             Contactar vendedor
           </button>
-          <button className="secondary">Guardar</button>
         </div>
       </div>
 
-      <ContactModal
-        isOpen={showContactModal}
-        onClose={() => setShowContactModal(false)}
-        seller={product?.vendedor || { nombre: "Vendedor" }}
-        productId={id}
-        productName={product?.nombre}
-      />
       </div>
 
       {/* LIGHTBOX */}
@@ -260,7 +253,7 @@ export default function ProductDetail() {
       <ContactModal
         isOpen={showContactModal}
         onClose={() => setShowContactModal(false)}
-        seller={product?.vendedor || { nombre: "Vendedor" }}
+        seller={product?.vendedor || { id: product?.creadoPor, nombre: "Vendedor" }}
         productId={id}
         productName={product?.nombre}
       />

@@ -9,6 +9,7 @@ import "../styles/mis-productos.css";
 export default function MisProductos() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState(null);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -28,22 +29,16 @@ export default function MisProductos() {
 
     const fetchMyProducts = async () => {
       try {
-        console.log("Buscando productos para UID:", user.uid);
         const q = query(
           collection(db, "productos"),
           where("creadoPor", "==", user.uid)
         );
 
         const snapshot = await getDocs(q);
-        console.log("Productos encontrados:", snapshot.docs.length);
-        
-        const data = snapshot.docs.map(doc => {
-          console.log("Producto:", doc.id, doc.data());
-          return {
-            id: doc.id,
-            ...doc.data(),
-          };
-        });
+        const data = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
 
         setProducts(data);
       } catch (error) {
@@ -57,13 +52,16 @@ export default function MisProductos() {
   }, [user]);
 
   const handleDelete = async (productId) => {
-    if (window.confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-      try {
-        await deleteDoc(doc(db, "productos", productId));
-        setProducts(products.filter(p => p.id !== productId));
-      } catch (error) {
-        console.error("Error eliminando producto:", error);
-      }
+    if (!window.confirm("¿Estás seguro de que deseas eliminar este producto?")) return;
+    setDeletingId(productId);
+    try {
+      await deleteDoc(doc(db, "productos", productId));
+      setProducts(prev => prev.filter(p => p.id !== productId));
+    } catch (error) {
+      console.error("Error eliminando producto:", error);
+      alert("No se pudo eliminar el producto. Intenta de nuevo.");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -122,11 +120,12 @@ export default function MisProductos() {
                     >
                       <FaEdit /> Editar
                     </button>
-                    <button 
+                    <button
                       className="btn-delete"
                       onClick={() => handleDelete(product.id)}
+                      disabled={deletingId === product.id}
                     >
-                      <FaTrash /> Eliminar
+                      <FaTrash /> {deletingId === product.id ? "Eliminando..." : "Eliminar"}
                     </button>
                   </td>
                 </tr>
