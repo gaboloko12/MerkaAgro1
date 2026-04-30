@@ -6,15 +6,14 @@ import "../styles/cards.css";
 export default function ProductCard({ product }) {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  const [liked, setLiked] = useState(false);
 
   const imageSrc =
     product?.imagenes?.[0] && product.imagenes[0].trim() !== ""
       ? product.imagenes[0]
       : null;
 
-  const handleImageLoad = () => {
-    setImageLoading(false);
-  };
+  const handleImageLoad = () => setImageLoading(false);
 
   const handleImageError = (e) => {
     setImageError(true);
@@ -22,11 +21,14 @@ export default function ProductCard({ product }) {
     e.currentTarget.src = "https://via.placeholder.com/400x200?text=Sin+Imagen";
   };
 
+  const handleLike = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setLiked(prev => !prev);
+  };
+
   return (
-    <Link
-      to={`/producto/${product.id}`}
-      className="product-card"
-    >
+    <Link to={`/producto/${product.id}`} className="product-card">
       <div className="image-container">
         {imageLoading && !imageError && (
           <div className="image-skeleton"></div>
@@ -39,6 +41,13 @@ export default function ProductCard({ product }) {
           onError={handleImageError}
           className={imageLoading ? "loading" : "loaded"}
         />
+        <button
+          className={`heart-btn${liked ? " liked" : ""}`}
+          onClick={handleLike}
+          aria-label="Guardar en favoritos"
+        >
+          {liked ? "♥" : "♡"}
+        </button>
       </div>
 
       <div className="card-body">

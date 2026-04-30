@@ -151,13 +151,49 @@ a.product-card {
 }
 
 /* =========================
+   HEART BUTTON (FAVORITOS)
+========================= */
+
+.heart-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #d1d5db;
+  z-index: 10;
+  transition: all 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  line-height: 1;
+  padding: 0;
+}
+
+.heart-btn:hover {
+  background: #ffffff;
+  transform: scale(1.1);
+  color: #ef4444;
+}
+
+.heart-btn.liked {
+  color: #ef4444;
+}
+
+/* =========================
    BADGE ESTRELLA
 ========================= */
 
 .badge-star {
   position: absolute;
   top: 8px;
-  right: 8px;
+  left: 8px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 50%;
   width: 32px;

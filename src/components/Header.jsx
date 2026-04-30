@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { FaChevronDown, FaSignOutAlt, FaBox, FaEnvelope, FaUser, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaChevronDown, FaSignOutAlt, FaBox, FaEnvelope, FaUser,
+  FaBars, FaTimes, FaSearch, FaShoppingCart, FaLeaf
+} from "react-icons/fa";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { CATEGORIAS_CON_EMOJI } from "../utils/categorias";
@@ -62,79 +65,106 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className="header-container">
-        <Link to="/" className="logo">MerkaAgro</Link>
-
-        {/* DESKTOP: categorías */}
-        <div className="categories-dropdown desktop-only">
-          <button className="categories-btn" onClick={() => setShowCategories(!showCategories)}>
-            Categorías
-            <FaChevronDown className={`chevron ${showCategories ? "open" : ""}`} />
-          </button>
-          {showCategories && (
-            <div className="categories-menu">
-              {CATEGORIAS_CON_EMOJI.map((cat) => (
-                <button key={cat} className="category-item" onClick={() => handleCategorySelect(cat)}>
-                  {cat}
-                </button>
-              ))}
-            </div>
-          )}
+      {/* TOPBAR */}
+      <div className="header-topbar">
+        <div className="topbar-container">
+          <span className="topbar-shipping">
+            <FaLeaf className="topbar-leaf" /> Envíos a todo México
+          </span>
+          <span className="topbar-slogan desktop-only">
+            🌾 Del campo para el campo — Tu mercado agrícola de confianza
+          </span>
         </div>
+      </div>
 
-        {/* BÚSQUEDA */}
-        <form className="search-form" onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Buscar productos..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="search-input"
-          />
-        </form>
+      {/* MAIN BAR */}
+      <div className="header-main-bar">
+        <div className="header-container">
+          <Link to="/" className="logo">
+            <FaLeaf className="logo-leaf" /> MerkaAgro
+          </Link>
 
-        {/* DESKTOP: nav */}
-        <nav className="nav-links desktop-only">
-          {user ? (
-            <>
-              <Link to="/mis-productos" className="nav-link"><FaBox /> <span>Mis productos</span></Link>
-              <Link to="/mensajes" className="nav-link"><FaEnvelope /> <span>Mensajes</span></Link>
-              <div className="user-menu">
-                <button className="user-btn" onClick={() => setShowUserMenu(!showUserMenu)}>
-                  <FaUser /> {user.email?.split("@")[0]}
-                  <FaChevronDown className={`chevron ${showUserMenu ? "open" : ""}`} />
-                </button>
-                {showUserMenu && (
-                  <div className="user-dropdown">
-                    <Link to="/perfil" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
-                      <FaUser /> Mi perfil
-                    </Link>
-                    <Link to="/nuevo-producto" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
-                      + Publicar producto
-                    </Link>
-                    <button className="dropdown-item logout" onClick={handleLogout}>
-                      <FaSignOutAlt /> Cerrar sesión
-                    </button>
-                  </div>
-                )}
+          {/* DESKTOP: categorías */}
+          <div className="categories-dropdown desktop-only">
+            <button className="categories-btn" onClick={() => setShowCategories(!showCategories)}>
+              <FaBars className="menu-icon" /> Categorías
+              <FaChevronDown className={`chevron ${showCategories ? "open" : ""}`} />
+            </button>
+            {showCategories && (
+              <div className="categories-menu">
+                {CATEGORIAS_CON_EMOJI.map((cat) => (
+                  <button key={cat} className="category-item" onClick={() => handleCategorySelect(cat)}>
+                    {cat}
+                  </button>
+                ))}
               </div>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="nav-link">Iniciar sesión</Link>
-              <Link to="/register" className="nav-link btn-register">Registrarse</Link>
-            </>
-          )}
-        </nav>
+            )}
+          </div>
 
-        {/* MOBILE: hamburger */}
-        <button
-          className="hamburger-btn mobile-only"
-          onClick={() => setShowMobileMenu(!showMobileMenu)}
-          aria-label="Menú"
-        >
-          {showMobileMenu ? <FaTimes /> : <FaBars />}
-        </button>
+          {/* BÚSQUEDA */}
+          <form className="search-form" onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Buscar productos, categorías..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="search-input"
+            />
+            <button type="submit" className="search-btn" aria-label="Buscar">
+              <FaSearch />
+            </button>
+          </form>
+
+          {/* DESKTOP: nav */}
+          <nav className="nav-links desktop-only">
+            {user ? (
+              <>
+                <Link to="/mis-productos" className="nav-link">
+                  <FaBox /> <span>Mis productos</span>
+                </Link>
+                <Link to="/mensajes" className="nav-link">
+                  <FaEnvelope /> <span>Mensajes</span>
+                </Link>
+                <div className="user-menu">
+                  <button className="user-btn" onClick={() => setShowUserMenu(!showUserMenu)}>
+                    <FaUser /> {user.email?.split("@")[0]}
+                    <FaChevronDown className={`chevron ${showUserMenu ? "open" : ""}`} />
+                  </button>
+                  {showUserMenu && (
+                    <div className="user-dropdown">
+                      <Link to="/perfil" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
+                        <FaUser /> Mi perfil
+                      </Link>
+                      <Link to="/nuevo-producto" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
+                        + Publicar producto
+                      </Link>
+                      <button className="dropdown-item logout" onClick={handleLogout}>
+                        <FaSignOutAlt /> Cerrar sesión
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <Link to="/" className="cart-link" aria-label="Carrito">
+                  <FaShoppingCart />
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="nav-link">Iniciar sesión</Link>
+                <Link to="/register" className="nav-link btn-register">Registrarse</Link>
+              </>
+            )}
+          </nav>
+
+          {/* MOBILE: hamburger */}
+          <button
+            className="hamburger-btn mobile-only"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            aria-label="Menú"
+          >
+            {showMobileMenu ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
       </div>
 
       {/* MOBILE MENU */}
