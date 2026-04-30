@@ -3,7 +3,7 @@
 .perfil-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 100px 20px 40px;
+  padding: 84px 20px 40px;
 }
 
 .perfil-card {
@@ -98,7 +98,7 @@
 
 @media (max-width: 768px) {
   .perfil-container {
-    padding: 80px 16px 30px;
+    padding: 116px 16px 30px;
   }
 
   .perfil-card {

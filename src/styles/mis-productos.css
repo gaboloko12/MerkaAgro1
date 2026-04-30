@@ -3,7 +3,7 @@
 .mis-productos-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px 40px;
+  padding: 84px 20px 40px;
 }
 
 .mis-productos-header {
@@ -146,34 +146,112 @@
 
 @media (max-width: 768px) {
   .mis-productos-container {
-    padding: 80px 16px 30px;
+    padding: 116px 16px 30px;
   }
 
   .mis-productos-header {
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     align-items: flex-start;
+    margin-bottom: 20px;
   }
 
   .mis-productos-header h1 {
     font-size: 1.6rem;
   }
 
+  .btn-new-product {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Convertir tabla a tarjetas en móvil */
   .productos-table {
-    overflow-x: auto;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
   }
 
-  .productos-table table {
-    min-width: 600px;
-  }
-
+  .productos-table table,
+  .productos-table thead,
+  .productos-table tbody,
   .productos-table th,
+  .productos-table td,
+  .productos-table tr {
+    display: block;
+  }
+
+  .productos-table thead tr {
+    display: none;
+  }
+
+  .productos-table tbody tr {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #16a34a;
+  }
+
   .productos-table td {
-    padding: 12px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border: none;
     font-size: 0.9rem;
+    color: #4b5563;
+  }
+
+  .productos-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+
+  .productos-table td.nombre {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+    padding-bottom: 10px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .productos-table td.nombre::before {
+    display: none;
   }
 
   .acciones {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-top: 10px;
+    margin-top: 4px;
+    border-top: 1px solid #f3f4f6;
+  }
+
+  .acciones::before {
+    display: none;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mis-productos-container {
+    padding: 108px 12px 24px;
   }
 }

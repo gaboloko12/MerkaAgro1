@@ -19,26 +19,22 @@ code {
     monospace;
 }
 
+/* Desktop header ~64px tall */
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 100px 20px 20px;
+  padding: 84px 20px 20px;
 }
 
+/* Mobile header (2 rows: logo+hamburger + search) ~105px */
 @media (max-width: 768px) {
   .container {
-    padding: 90px 12px 16px;
-  }
-}
-
-@media (max-width: 640px) {
-  .container {
-    padding: 100px 8px 12px;
+    padding: 116px 12px 16px;
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 95px 6px 10px;
+    padding: 108px 8px 12px;
   }
 }

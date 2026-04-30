@@ -94,16 +94,16 @@ export default function MisProductos() {
               {products.map(product => (
                 <tr key={product.id}>
                   <td className="nombre">{product.nombre}</td>
-                  <td>{product.categoria}</td>
-                  <td>
-                    {product.precioNegociable 
-                      ? "A consultar" 
+                  <td data-label="Categoría">{product.categoria}</td>
+                  <td data-label="Precio">
+                    {product.precioNegociable
+                      ? "A consultar"
                       : `$${product.precio?.toLocaleString()}`
                     }
                   </td>
-                  <td>{product.ubicacion}</td>
+                  <td data-label="Ubicación">{product.ubicacion}</td>
                   <td className="acciones">
-                    <button 
+                    <button
                       className="btn-edit"
                       onClick={() => navigate(`/editar-producto/${product.id}`)}
                     >
