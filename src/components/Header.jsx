@@ -4,22 +4,15 @@ import { FaChevronDown, FaSignOutAlt, FaBox, FaEnvelope, FaUser } from "react-ic
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { CATEGORIAS_CON_EMOJI } from "../utils/categorias";
+import { useAuth } from "../context/AuthContext";
 import "../styles/header.css";
 
 export default function Header() {
   const [search, setSearch] = useState("");
   const [showCategories, setShowCategories] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
   const navigate = useNavigate();
-
-  // Obtener usuario autenticado
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      setUser(currentUser);
-    });
-    return unsubscribe;
-  }, []);
 
   // Cerrar menús al hacer clic fuera
   useEffect(() => {

@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db, storage } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
 import { FaUpload, FaTrash } from "react-icons/fa";
 import { CATEGORIAS } from "../utils/categorias";
 import "../styles/nuevo-producto.css";
@@ -12,7 +11,6 @@ const MAX_IMAGEN_MB = 5;
 
 export default function NuevoProducto() {
   const navigate = useNavigate();
-  const [, setUser] = useState(null);
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
@@ -28,17 +26,6 @@ export default function NuevoProducto() {
   const [envioMexico, setEnvioMexico] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      if (!currentUser) {
-        navigate("/login");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

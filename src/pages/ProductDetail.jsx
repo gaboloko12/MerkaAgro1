@@ -4,6 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { getCategoriaConEmoji } from "../utils/categoriaMapper";
 import ContactModal from "../components/ContactModal";
+import { Helmet } from "react-helmet-async";
 import { FaPhone, FaWhatsapp, FaChevronLeft, FaChevronRight, FaTimes, FaSearchPlus } from "react-icons/fa";
 import "../styles/ProductDetail.css";
 
@@ -82,8 +83,26 @@ export default function ProductDetail() {
   if (loading) return <p className="loading">Cargando producto...</p>;
   if (!product) return <p className="error">Producto no encontrado</p>;
 
+  const metaDescription = product.descripcion?.slice(0, 155) || `${product.nombre} disponible en MerkaAgro. Marketplace de productos agrícolas en México.`;
+  const metaImage = product.imagenes?.[0] || "https://www.merkaagro.com/logo-og.png";
+  const canonicalUrl = `https://www.merkaagro.com/producto/${id}`;
+
   return (
     <>
+      <Helmet>
+        <title>{product.nombre} | MerkaAgro</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="product" />
+        <meta property="og:title" content={`${product.nombre} | MerkaAgro`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={metaImage} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta name="twitter:title" content={`${product.nombre} | MerkaAgro`} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={metaImage} />
+      </Helmet>
+
       {/* NOMBRE DEL PRODUCTO - Fijo debajo del header */}
       <div className="product-title-bar">
         <div className="product-title-container">

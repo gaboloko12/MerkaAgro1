@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { db, auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { db } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import "../styles/mis-productos.css";
 
@@ -10,19 +10,8 @@ export default function MisProductos() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState(null);
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      if (!currentUser) {
-        navigate("/login");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
 
   useEffect(() => {
     if (!user) return;

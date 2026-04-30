@@ -1,26 +1,13 @@
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs, orderBy, updateDoc, doc } from "firebase/firestore";
-import { db, auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { db } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 import "../styles/mensajes.css";
 
 export default function MensajesVendedor() {
   const [mensajes, setMensajes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      if (!currentUser) {
-        navigate("/login");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
+  const { user } = useAuth();
 
   useEffect(() => {
     if (!user) return;

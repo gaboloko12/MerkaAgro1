@@ -1,6 +1,7 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+Allow: /producto/
 Disallow: /mis-productos
 Disallow: /nuevo-producto
 Disallow: /editar-producto/

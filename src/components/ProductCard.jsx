@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { getCategoriaConEmoji } from "../utils/categoriaMapper";
 import "../styles/cards.css";
 
 export default function ProductCard({ product }) {
-  const navigate = useNavigate();
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
 
@@ -24,9 +23,9 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div
+    <Link
+      to={`/producto/${product.id}`}
       className="product-card"
-      onClick={() => navigate(`/producto/${product.id}`)}
     >
       <div className="image-container">
         {imageLoading && !imageError && (
@@ -46,8 +45,8 @@ export default function ProductCard({ product }) {
         <h3>{product.nombre}</h3>
         <p className="categoria">{getCategoriaConEmoji(product.categoria)}</p>
         <p className="price">
-          {product.precio === 0 || product.precioNegociable 
-            ? "Precio a consultar" 
+          {product.precio === 0 || product.precioNegociable
+            ? "Precio a consultar"
             : `$${product.precio?.toLocaleString()}`
           }
         </p>
@@ -58,6 +57,6 @@ export default function ProductCard({ product }) {
       </div>
 
       {product.destacado && <span className="badge-star">⭐</span>}
-    </div>
+    </Link>
   );
 }

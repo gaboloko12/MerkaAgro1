@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { auth, db, storage } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { db, storage } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 import { FaUpload, FaTrash } from "react-icons/fa";
 import { CATEGORIAS } from "../utils/categorias";
 import "../styles/nuevo-producto.css";
@@ -13,7 +13,7 @@ const MAX_IMAGEN_MB = 5;
 export default function EditarProducto() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     nombre: "",
@@ -31,17 +31,6 @@ export default function EditarProducto() {
   const [envioMexico, setEnvioMexico] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      if (!currentUser) {
-        navigate("/login");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
 
   useEffect(() => {
     const fetchProduct = async () => {
