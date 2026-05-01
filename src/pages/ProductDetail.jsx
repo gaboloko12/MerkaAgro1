@@ -197,20 +197,26 @@ export default function ProductDetail() {
         )}
 
         {/* DESCRIPCIÓN CON VER MÁS */}
-        <div className="description-section">
-          <h3>Descripción</h3>
-          <p className={`description ${!showFullDescription ? 'description-collapsed' : ''}`}>
-            {product.descripcion}
-          </p>
-          {product.descripcion && product.descripcion.length > 200 && (
-            <button 
-              className="btn-ver-mas"
-              onClick={() => setShowFullDescription(!showFullDescription)}
-            >
-              {showFullDescription ? 'Ver menos' : 'Ver más'}
-            </button>
-          )}
-        </div>
+        {product.descripcion && (() => {
+          const lines = product.descripcion.split('\n').length;
+          const isLong = lines > 7 || product.descripcion.length > 480;
+          return (
+            <div className="description-section">
+              <h3>Descripción</h3>
+              <p className={`description${isLong && !showFullDescription ? ' description-collapsed' : ''}`}>
+                {product.descripcion}
+              </p>
+              {isLong && (
+                <button
+                  className="btn-ver-mas"
+                  onClick={() => setShowFullDescription(!showFullDescription)}
+                >
+                  {showFullDescription ? 'Ver menos' : 'Ver más'}
+                </button>
+              )}
+            </div>
+          );
+        })()}
 
         {/* CONTACTO DEL VENDEDOR */}
         {product.contacto && (

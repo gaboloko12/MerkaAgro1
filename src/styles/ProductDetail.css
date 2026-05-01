@@ -253,19 +253,8 @@
 }
 
 .description-collapsed {
-  max-height: 150px;
+  max-height: 200px; /* ~7 líneas a 1.7 line-height */
   overflow: hidden;
-  position: relative;
-}
-
-.description-collapsed::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background: linear-gradient(to bottom, transparent, #f9fafb);
 }
 
 .btn-ver-mas {
@@ -563,7 +552,7 @@
   }
 
   .description-collapsed {
-    max-height: 120px;
+    max-height: 170px;
   }
 
   .btn-ver-mas {
@@ -722,7 +711,7 @@
   }
 
   .description-collapsed {
-    max-height: 100px;
+    max-height: 160px;
   }
 
   .btn-ver-mas {
@@ -884,11 +873,7 @@
   }
 
   .description-collapsed {
-    max-height: 90px;
-  }
-
-  .description-collapsed::after {
-    height: 50px;
+    max-height: 150px;
   }
 
   .btn-ver-mas {
